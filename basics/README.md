@@ -1,1 +1,1 @@
-This repository contains basic shell scripts.
+This repository contains basic shell scripts for learning purposes.
