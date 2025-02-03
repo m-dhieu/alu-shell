@@ -1,2 +1,2 @@
-#!/bin/bash
-OWNER=$(stat -c "%U" hello)  if [ "$OWNER" = "guillaume" ]; then sudo chown vincent hello; fi
+OWNER=$(stat -c "%U" hello)  
+if [ "$OWNER" = "guillaume" ]; then sudo chown vincent hello; fi
