@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -empty | while read -r path; do echo "${path##*/}"; done echo
+find . -empty | cut -d '/' -f2- | sort echo ""
