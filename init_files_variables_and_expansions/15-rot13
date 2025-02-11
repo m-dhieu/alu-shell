@@ -1,2 +1,2 @@
 #!/bin/bash 
-for i in {a..z}; do printf "%c" $(echo "obase=10; ibase=10; ($(( $(printf '%d' "'$i") -97 +12))%26)+97" | bc); done | tr 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' 'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM'
+for i in {a..z}; do printf "%c" $(expr \( \( $(printf '%d' "'$i") -97 +12 \) %26 \)+97); done | tr 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' 'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM'
