@@ -1,0 +1,9 @@
+#!/usr/bin/env bash 
+# Script to list filenames in the current directory exclusive of hidden files.
+
+for file in *; do
+    if [[ $file != .* ]]; then # Skip hidden files
+        name=${file#*-} # Remove everything before and including the first dash
+        echo "$name"
+    fi
+done
