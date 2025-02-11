@@ -1,2 +1,2 @@
 #!/bin/bash
-( echo "Variables:" declare -p echo "\nFunctions:" declare -f  ) | less 
+echo "Environment Variables:" printenv echo "\nLocal/Global Variables:" declare -p echo "\nFunctions:" declare -f
