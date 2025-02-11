@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "Environment Variables:" printenv echo "\nLocal/Global Variables:" declare -p echo "\nFunctions:" declare -f
+echo "Environment Variables:" printenv | grep -E '^BASH|^BASHOPTS' echo "\nLocal/Global Variables:" declare -p | grep -E '^BASH|^BASHOPTS' echo "\nFunctions:" declare -f
