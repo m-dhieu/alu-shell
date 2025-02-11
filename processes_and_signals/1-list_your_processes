@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Script to list current running processes for all users in a tree-like format.
+
+ps aux --forest
