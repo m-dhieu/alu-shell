@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-# Script to iterate over all PIDs in/proc then stop the '4-to_infinity_and_beyond' process using kill.
-
-found=false
+# Script to stop the '4-to_infinity_and_beyond' process using kill.
 
 for pid in /proc/[0-9]*; do
     pid_num=${pid##*/}
@@ -11,9 +9,8 @@ for pid in /proc/[0-9]*; do
 
         if [[ "$comm" =~ "4-to_infinity_and_beyond" ]]; then
             kill "$pid_num"
-
-	    found=true
-	    break  
+            exit 0  
         fi  
     fi
-done 
+done
+exit 1 > /dev/null 2>&1 
