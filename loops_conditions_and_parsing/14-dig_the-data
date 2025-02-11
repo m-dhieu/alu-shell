@@ -1,4 +1,4 @@
 #!/usr/bin/env bash 
 # Script to group Apache log entries by IP and HTTP status code.
 
-awk '{count[$1,$9]++} END { for (i in count) { split(i, arr, SUBSEP); print count[i], arr[1], arr[2] } }' apache-access.log | sort -rn
+awk '{count[$1,$9]++} END { for (i in count) { split(i, arr, SUBSEP); printf "%d %s %s\n", count[i], arr[1], arr[2] } }' apache-access.log | sort -rn
