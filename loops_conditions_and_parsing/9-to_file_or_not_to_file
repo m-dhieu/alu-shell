@@ -11,8 +11,9 @@ if [ -e school ]; then
             echo "school file is not empty"
         fi
     elif [ -d school ]; then 
-        echo "School exists but it’s a directory."
+        echo "school file exists"
+	echo "school file is not empty"
     fi
 else 
-    echo "school does not exist in any form."
+    echo "school file does not exist"
 fi
