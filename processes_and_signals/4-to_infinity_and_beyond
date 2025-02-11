@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Script to display specific message, indefinitely.
+
+while true; do
+    echo "To infinity and beyond"
+    sleep 2 # Sleep for 2 seconds between/before each/next iteration.
+done
