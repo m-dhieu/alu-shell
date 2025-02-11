@@ -8,7 +8,7 @@ for pid in /proc/[0-9]*; do
         comm=$(tr -d '\0' < "${pid}/comm")
 
         if [[ "$comm" =~ "4-to_infinity_and_beyond" ]]; then
-            kill "$pid"
+            kill "$pid_num"
             exit 0  
         fi  
     fi
