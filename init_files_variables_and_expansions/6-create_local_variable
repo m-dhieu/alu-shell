@@ -1,2 +1,1 @@
-#!/bin/bash
-(local BEST="School") & (echo "BEST=${BEST:-School}")
+#!/bin/bash(local BEST="School") & (echo "BEST=${BEST:-School}")
