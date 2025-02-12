@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Script to manage manage_my_process, handling start, stop, and restart operations.
+
+case $1 in
+    
+    start)
+        if [ -f "/var/run/myprocess.pid" ]; then    
+            exit 1
+            
+        fi
+                
+        (while true; do 
+          echo "I am alive!" >> /tmp/myprocess.log;
+          sleep 2;
+         done)& 
+    
+        pid=$!
+    
+    ;;
+    stop)
+        
+        if [ ! -f "/var/run/myprocess.pid" ]; then    
+            exit 1
+            
+        fi
+        
+        pid=$(cat "/var/run/myprocess.pid")
+        
+       kill "$pid"
+       
+       rm "/var/run/myProcess.pid"
+   ;;
+   restart)
+       ./11-manage-my-process.sh stop && ./11-manage-my-process.sh start
+   ;;
+   *)
+
+esac  

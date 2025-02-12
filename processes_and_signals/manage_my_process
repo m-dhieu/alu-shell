@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Script to write text every 2 seconds indefinitely
+
+while true; do
+    echo "I am alive!" >> /tmp/my_process.log
+    sleep 2
+done
