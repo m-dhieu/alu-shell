@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
-# Script to stop 7-highlander process.
+# Script to stop 7-highlander process
 
-killall -9 7-highlander
+pid=$(pgrep -f 7-highlander)
+
+if [ -z "$pid" ]; then
+
+    # If PID of 7-highlander not found, start process in background and get its PID immediately.
+    (while true; do echo "I am the Highlander"; sleep 1; done) &
+    pid=$!
+else
+fi
+kill -9 "$pid"
