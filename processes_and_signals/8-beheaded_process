@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
 # Script to stop 7-highlander process
 
-while true; do
-    
-    if ! pgrep -f 4-to_infinity_and_beyond; then
-        
-        # If not running, start it in background.
-        (while true; do echo "To infinity and beyond"; sleep 1; done) &
-        sleep 0.5  
-    fi
-    pkill -9 -f 4-to_infinity_and_beyond
-done
+if pgrep -f "4-to-infinity-and-beyond"; then
+    pkill -9 -f "4-to-infinity-and-beyond"
+else 
+   exit 1
+fi 
+exit 2  
