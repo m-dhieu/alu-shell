@@ -1,38 +1,43 @@
 #!/usr/bin/env bash
-# Script to manage manage_my_process, handling start, stop, and restart operations.
+# Script to manage manage_my_process, handling start, stop, and restart.
 
 case $1 in
     
     start)
-        if [ -f "/var/run/myprocess.pid" ]; then    
+        if [ -f "/var/run/myprocess.pid" ]; then
+            
+            echo "Process seems to be running. Use restart or stop first."    
             exit 1
             
         fi
-                
+        
         (while true; do 
           echo "I am alive!" >> /tmp/myprocess.log;
           sleep 2;
          done)& 
-    
+        
         pid=$!
-    
+        
+        echo "$pid" > "/var/run/myprocess.pid"
+        echo "manage_my_process started."
     ;;
     stop)
         
-        if [ ! -f "/var/run/myprocess.pid" ]; then    
+        if [ ! -f "/var/run/myprocess.pid" ]; then
+            echo "No running process found."            
             exit 1
             
         fi
-        
+
         pid=$(cat "/var/run/myprocess.pid")
         
        kill "$pid"
-       
        rm "/var/run/myProcess.pid"
+       echo "manage-my-process stopped."
    ;;
    restart)
        ./11-manage-my-process.sh stop && ./11-manage-my-process.sh start
    ;;
    *)
-
-esac  
+       echo "Usage: $0 {start|stop|restart}"
+esac   
