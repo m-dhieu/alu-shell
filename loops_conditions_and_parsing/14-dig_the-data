@@ -1,11 +1,4 @@
 #!/usr/bin/env bash 
 # Script to group Apache log entries by IP and HTTP status code.
 
-LOG_FILE="apache-access.log"
-
-if [[ ! -f $LOG_FILE ]]; then
-    echo "Log file not found: $LOG_FILE"
-    exit 1
-fi
-
-awk '{print $1, $9}' "$LOG_FILE"
+awk '{print $1,$9}' apache-access.log | sort -V | uniq -c | sort -n | perl -e 'print reverse <>'
