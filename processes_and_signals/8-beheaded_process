@@ -2,7 +2,4 @@
 # Script to stop 7-highlander process.
 
 if pkill -9 -f 7-highlander; then
-    echo ""
-else
-    echo "No such process found."
 fi

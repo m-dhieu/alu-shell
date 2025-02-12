@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Script to create PID file and handle signals.
+
+echo $$ > /var/run/myscript.pid
+
+trap 'rm -f /var/run/myscript.pid; echo "I hate the kill command"; exit' TERM QUIT
+trap 'echo "Y U no love me?!"' INT
+
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
