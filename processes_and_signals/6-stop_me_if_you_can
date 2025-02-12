@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 # Script to stop 4-to_infinity_and_beyond process.
 
-pid=$(ps -ef | grep -v grep | grep 4-to_infinity_and_beyond | awk )
+pid=$(pgrep -f 4-to_infinity_and_beyond)
 
-if [ -n "$pid" ]; then
-    /bin/sh -c "echo 9 > /proc/$pid/signal"
+if [ -z "$pid" ]; then
+
+    # If PID of 4-to_infinity_and_beyond not found, start process in background and get its PID immediately.
+    (while true; do echo "To infinity and beyond"; sleep 1; done) &
+    pid=$!
 fi
+pkill -9 "$pid"
