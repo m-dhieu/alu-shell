@@ -1,43 +1,27 @@
 #!/usr/bin/env bash
 # Script to manage manage_my_process, handling start, stop, and restart.
 
-case $1 in
+case "$1" in
     
-    start)
-        if [ -f "/var/run/myprocess.pid" ]; then
-            
-            echo "Process seems to be running. Use restart or stop first."    
-            exit 1
-            
-        fi
-        
-        (while true; do 
-          echo "I am alive!" >> /tmp/myprocess.log;
-          sleep 2;
-         done)& 
-        
-        pid=$!
-        
-        echo "$pid" > "/var/run/myprocess.pid"
-        echo "manage_my_process started."
-    ;;
-    stop)
-        
-        if [ ! -f "/var/run/myprocess.pid" ]; then
-            echo "No running process found."            
-            exit 1
-            
-        fi
-
-        pid=$(cat "/var/run/myprocess.pid")
-        
-       kill "$pid"
-       rm "/var/run/myProcess.pid"
-       echo "manage-my-process stopped."
-   ;;
-   restart)
-       ./11-manage-my-process.sh stop && ./11-manage-my-process.sh start
-   ;;
-   *)
-       echo "Usage: $0 {start|stop|restart}"
-esac   
+	start)	
+		if ! pgrep -f './manage_my_process' >/dev/null ;then	
+			./manage_my_process >/devnull&
+			PID=$!
+			echo $PID>"rund/manage_my_process.pid";
+			echo'manage_my_process started';
+		else
+			print'manage_my_proceess is alredy running.';
+	fi;;	
+	
+	stop)		
+		if pgrep -f './manage_my_process'&>/devnull ;then			
+				kill$(pgrep -f manage_my_process) & || true rm rund/manager_my_process.pid || true echo'manage_my_process stopped';
+				else
+					print"No manage_my_process found.";
+	fi;;	
+	
+	restart)		
+	if pgrep -f './manage_my_process*'&>/devnull ;then kill$(pgrep -f mange_my_process)&||true remove rund/manage_my_process.pid ||true echo'manage_my_process restarted';
+	else ./manage_my_process>&/devnull&PID=$!echopID>rund/manage_my_process not restarted';;
+	
+	esac

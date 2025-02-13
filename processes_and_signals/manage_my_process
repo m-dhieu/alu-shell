@@ -2,6 +2,6 @@
 # Script to write text every 2 seconds indefinitely
 
 while true; do
-    echo "I am alive!" >> /tmp/my_process.log
+    echo "I am alive!" >> /tmp/my_process
     sleep 2
 done
