@@ -1,27 +1,29 @@
 #!/usr/bin/env bash
 # Script to manage manage_my_process, handling start, stop, and restart.
 
-case "$1" in
-    
-	start)	
-		if ! pgrep -f './manage_my_process' >/dev/null ;then	
-			./manage_my_process >/devnull&
-			PID=$!
-			echo $PID>"rund/manage_my_process.pid";
-			echo'manage_my_process started';
-		else
-			print'manage_my_proceess is alredy running.';
-	fi;;	
-	
-	stop)		
-		if pgrep -f './manage_my_process'&>/devnull ;then			
-				kill$(pgrep -f manage_my_process) & || true rm rund/manager_my_process.pid || true echo'manage_my_process stopped';
-				else
-					print"No manage_my_process found.";
-	fi;;	
-	
-	restart)		
-	if pgrep -f './manage_my_process*'&>/devnull ;then kill$(pgrep -f mange_my_process)&||true remove rund/manage_my_process.pid ||true echo'manage_my_process restarted';
-	else ./manage_my_process>&/devnull&PID=$!echopID>rund/manage_my_process not restarted';;
-	
-	esac
+if [[ "$#" == "1" ]]; then
+  if [[ "$1" == "start" ]]; then
+    ./manage_my_process &
+    echo "$!" > /var/run/my_process.pid
+    echo "manage_my_process started"
+  elif [[ "$1" == "stop" ]]; then
+    if test -f "/var/run/my_process.pid"; then
+      kill "$(cat /var/run/my_process.pid)"
+    fi
+    rm /var/run/my_process.pid
+    echo "manage_my_process stopped"
+  elif [[ "$1" == "restart" ]]; then
+    # stop program
+    if test -f "/var/run/my_process.pid"; then
+      kill "$(cat /var/run/my_process.pid)"
+    fi
+    # start program
+    ./manage_my_process &
+    echo "$!" > /var/run/my_process.pid
+    echo "manage_my_process restarted"
+  else
+    echo "Usage: manage_my_process {start|stop|restart}"
+  fi
+else
+  echo "Usage: manage_my_process {start|stop|restart}"
+fi

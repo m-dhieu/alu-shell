@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # Script to write text every 2 seconds indefinitely
 
+if [ ! -d "/tmp/my_process" ]; then 
+    mkdir "/tmp/my_process"
+    echo "/tmp/my_process created"
+fi
+
 while true; do
-    echo "I am alive!" >> /tmp/my_process
+    echo "I am alive!" > /tmp/my_process
     sleep 2
 done
